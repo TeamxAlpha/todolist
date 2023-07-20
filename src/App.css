@@ -5,13 +5,15 @@
   max-width: 400px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+ol {
+  list-style-type:lower-alpha ;
+  padding: 5.5%;
 }
 
 li {
   margin: 8px 0;
+  color: white;
+  font-size: 24px;
 }
 
 input[type="text"] {

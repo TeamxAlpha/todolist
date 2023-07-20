@@ -13,12 +13,19 @@ function App() {
     if (newTask.trim() !== '') {
       setTasks([...tasks, newTask]);
       setNewTask('');
+
     }
+  };
+
+  const deleteTask = (task) => {
+    setTasks((tasks)=> tasks.filter((item)=>item !== task)
+    )
+    // console.log(task);
   };
 
   return (
     <div className="App">
-      <h1 style={{color: 'white'}}>Todo App</h1>
+      <h1 style={{ color: 'white' }}>Todo App</h1>
       <div>
         <input
           type="text"
@@ -28,11 +35,14 @@ function App() {
         />
         <button onClick={addTask}>Add</button>
       </div>
-      <ul>
+      <ol>
         {tasks.map((task, index) => (
-          <li key={index}>{task}</li>
+          <li key={index}>
+            {task}
+            <button onClick={() => deleteTask(task)}>Delete</button>
+          </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
