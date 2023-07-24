@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import TaskItem from './components/TaskItem';
 import TaskInput from './components/TaskInput';
 import './App.css';
+import {TaskProvider, useTaskContext} from './context/notes/NoteContext';
+import HoverDialog from './components/HoverDialogBox';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const {tasks, setTasks} = useTaskContext();
   const [newTask, setNewTask] = useState('');
   const [selectedTask, setSelectedTask] = useState('');
   
@@ -53,6 +55,7 @@ function App() {
         isEditMode={!!selectedTask}
         onEditTask={saveEditedTask}
       />
+        < HoverDialog/>
       <ol>
         {tasks.map((task, index) => (
           <TaskItem
@@ -69,4 +72,14 @@ function App() {
   );
 }
 
-export default App;
+
+
+
+function AppWrapper( ){
+  return(
+  <TaskProvider>
+    <App/>
+  </TaskProvider>
+)
+}
+export default AppWrapper;

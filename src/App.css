@@ -75,3 +75,10 @@ button {
 .cut{
   text-decoration: line-through;
 }
+
+/* .Note{
+  border: 1px solid yellowgreen ;
+  display: flex;
+  flex-direction: row;
+} */
+
