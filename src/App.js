@@ -9,6 +9,7 @@ function App() {
   const {tasks, setTasks} = useTaskContext();
   const [newTask, setNewTask] = useState('');
   const [selectedTask, setSelectedTask] = useState('');
+
   
   const handleInputChange = (event) => {
     setNewTask(event.target.value);
@@ -45,9 +46,10 @@ function App() {
     setSelectedTask('');
   };
 
+
   return (
     <div className="App">
-      <h1>📝 Todo App</h1>
+      <h1>📝 Todo-List</h1>
       <TaskInput
         value={newTask}
         onChange={handleInputChange}

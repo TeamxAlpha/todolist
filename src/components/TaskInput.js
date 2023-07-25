@@ -1,17 +1,21 @@
 
 import React from 'react';
 
-function TaskInput({ value, onChange, onAddTask, isEditMode, onEditTask }) {
+function TaskInput({ value, onChange, onAddTask, isEditMode, onEditTask,onFilterChange  }) {
 
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); 
     if (isEditMode) {
       onEditTask();
     } else {
       onAddTask();
     }
   };
+  const handleFilterClick = (filterValue) => {
+    onFilterChange(filterValue);
+  };
+  
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -25,6 +29,15 @@ function TaskInput({ value, onChange, onAddTask, isEditMode, onEditTask }) {
       ) : (
         <button onClick={onAddTask}>Add</button>
       )}
+      
+      <div class="dropdown">
+  <button class="dropbtn">Filter</button>
+  <div class="dropdown-content">
+          <p onClick={() => handleFilterClick('all')}>All Tasks</p>
+          <p onClick={() => handleFilterClick('completed')}>Completed</p>
+          <p onClick={() => handleFilterClick('tbd')}>TBD</p>
+  </div>
+</div>
     </form>
   );
 }
