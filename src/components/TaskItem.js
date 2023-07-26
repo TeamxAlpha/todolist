@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+// components/TaskItem.js
+import React from 'react';
 
-function TaskItem  ({ task, index, deleteTask, editTask,}) {
-
-  const [check, setcheck] = useState (false);
-
-  let className = check ? "cut" : "";
+const TaskItem = ({ task, index, deleteTask, editTask, cutTask }) => {
+  const handleCheckboxChange = () => {
+    cutTask(task);
+  };
 
   return (
-    <div className="container">
-    <input type="checkbox" onClick={()=> setcheck(!check)} ></input>
-    <li className={className}  onClick={() => editTask(task)}>
-      {index}.{task}
+    <li>
+      <input className="Checkbox"
+        type="checkbox"
+        checked={task.isCompleted}
+        onChange={handleCheckboxChange}
+      />
+      <span
+        style={{ textDecoration: task.isCompleted ? 'line-through' : 'none' }}
+      >
+        {task.taskName}
+      </span>
       <div className="listitems">
     
-      <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" onClick={() => editTask(task)} className="edit" alt="Edit" data-id="2"></img>
+    <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" onClick={() => editTask(task.taskName)} className="edit" alt="Edit" data-id="2"></img>
 
-      <img src="https://cdn-icons-png.flaticon.com/128/3096/3096673.png"onClick={() => deleteTask(task)} className="delete" alt="delete" data-id="2"></img>
-      </div>
-
+    <img src="https://cdn-icons-png.flaticon.com/128/3096/3096673.png"onClick={() => deleteTask(task.taskName)} className="delete" alt="delete" data-id="2"></img>
+    </div>
     </li>
-    </div>  );
-
-}
+  );
+};
 
 export default TaskItem;
-

@@ -1,45 +1,32 @@
-
+// components/TaskInput.js
 import React from 'react';
 
-function TaskInput({ value, onChange, onAddTask, isEditMode, onEditTask,onFilterChange  }) {
-
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    if (isEditMode) {
-      onEditTask();
-    } else {
-      onAddTask();
+const TaskInput = ({ value, onChange, onAddTask, isEditMode, onEditTask }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      if (isEditMode) {
+        onEditTask();
+      } else {
+        onAddTask();
+      }
     }
   };
-  const handleFilterClick = (filterValue) => {
-    onFilterChange(filterValue);
-  };
-  
+
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <input
         type="text"
         value={value}
         onChange={onChange}
-        placeholder="Enter a new task"
+        onKeyDown={handleKeyDown}
+        placeholder="Add a new task..."
       />
-      {isEditMode ? (
-        <button onClick={onEditTask}>Edit</button>
-      ) : (
-        <button onClick={onAddTask}>Add</button>
-      )}
-      
-      <div class="dropdown">
-  <button class="dropbtn">Filter</button>
-  <div class="dropdown-content">
-          <p onClick={() => handleFilterClick('all')}>All Tasks</p>
-          <p onClick={() => handleFilterClick('completed')}>Completed</p>
-          <p onClick={() => handleFilterClick('tbd')}>TBD</p>
-  </div>
-</div>
-    </form>
+      <button onClick={isEditMode ? onEditTask : onAddTask}>
+        {isEditMode ? 'Save' : 'Add'}
+      </button>
+  
+    </div>
   );
-}
+};
 
 export default TaskInput;
